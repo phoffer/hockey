@@ -22,3 +22,22 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+# Local setup
+
+```
+git clone
+
+# if ruby/nodejs/yarn aren't available via asdf
+asdf plugin add ruby
+asdf plugin add nodejs
+asdf plugin add yarn
+# 
+
+asdf install
+bundle
+yarn
+bundle exec rails db:setup
+
+```
+
