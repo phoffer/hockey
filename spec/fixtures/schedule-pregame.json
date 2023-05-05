@@ -1,0 +1,127 @@
+{
+  "copyright": "NHL and the NHL Shield are registered trademarks of the National Hockey League. NHL and NHL team marks are the property of the NHL and its teams. © NHL 2023. All Rights Reserved.",
+  "totalItems": 2,
+  "totalEvents": 0,
+  "totalGames": 2,
+  "totalMatches": 0,
+  "metaData": {
+    "timeStamp": "20230504_230345"
+  },
+  "wait": 10,
+  "dates": [
+    {
+      "date": "2023-05-04",
+      "totalItems": 2,
+      "totalEvents": 0,
+      "totalGames": 2,
+      "totalMatches": 0,
+      "games": [
+        {
+          "gamePk": 2022030212,
+          "link": "/api/v1/game/2022030212/feed/live",
+          "gameType": "P",
+          "season": "20222023",
+          "gameDate": "2023-05-04T23:00:00Z",
+          "status": {
+            "abstractGameState": "Preview",
+            "codedGameState": "2",
+            "detailedState": "Pre-Game",
+            "statusCode": "2",
+            "startTimeTBD": false
+          },
+          "teams": {
+            "away": {
+              "leagueRecord": {
+                "wins": 5,
+                "losses": 3,
+                "type": "league"
+              },
+              "score": 0,
+              "team": {
+                "id": 13,
+                "name": "Florida Panthers",
+                "link": "/api/v1/teams/13"
+              }
+            },
+            "home": {
+              "leagueRecord": {
+                "wins": 4,
+                "losses": 3,
+                "type": "league"
+              },
+              "score": 0,
+              "team": {
+                "id": 10,
+                "name": "Toronto Maple Leafs",
+                "link": "/api/v1/teams/10"
+              }
+            }
+          },
+          "venue": {
+            "name": "Scotiabank Arena",
+            "link": "/api/v1/venues/null"
+          },
+          "content": {
+            "link": "/api/v1/game/2022030212/content"
+          }
+        },
+        {
+          "gamePk": 2022030232,
+          "link": "/api/v1/game/2022030232/feed/live",
+          "gameType": "P",
+          "season": "20222023",
+          "gameDate": "2023-05-05T01:30:00Z",
+          "status": {
+            "abstractGameState": "Preview",
+            "codedGameState": "1",
+            "detailedState": "Scheduled",
+            "statusCode": "1",
+            "startTimeTBD": false
+          },
+          "teams": {
+            "away": {
+              "leagueRecord": {
+                "wins": 5,
+                "losses": 3,
+                "type": "league"
+              },
+              "score": 0,
+              "team": {
+                "id": 55,
+                "name": "Seattle Kraken",
+                "link": "/api/v1/teams/55"
+              }
+            },
+            "home": {
+              "leagueRecord": {
+                "wins": 4,
+                "losses": 3,
+                "type": "league"
+              },
+              "score": 0,
+              "team": {
+                "id": 25,
+                "name": "Dallas Stars",
+                "link": "/api/v1/teams/25"
+              }
+            }
+          },
+          "venue": {
+            "id": 5019,
+            "name": "American Airlines Center",
+            "link": "/api/v1/venues/5019"
+          },
+          "content": {
+            "link": "/api/v1/game/2022030232/content"
+          }
+        }
+      ],
+      "events": [
+
+      ],
+      "matches": [
+
+      ]
+    }
+  ]
+}

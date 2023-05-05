@@ -89,12 +89,33 @@ RSpec.configure do |config|
   # order dependency and want to debug it, you can fix the order by providing
   # the seed, which is printed after each run.
   #     --seed 1234
-  config.order = :random
 
   # Seed global randomization in this process using the `--seed` CLI option.
   # Setting this allows you to use `--seed` to deterministically reproduce
   # test failures related to randomization by passing the same `--seed` value
   # as the one that triggered the failure.
-  Kernel.srand config.seed
 =end
+end
+
+## Setup basic stubbing support for NHL API. Would do something more advanced like VCR in a proper app, but wanted to reuse the prettified json already saved
+AVAILABLE_STUBS = {
+  'game-statuses'             => "https://statsapi.web.nhl.com/api/v1/gameStatus",
+  'schedule-pregame'          => "https://statsapi.web.nhl.com/api/v1/schedule",
+  'schedule-live'             => "https://statsapi.web.nhl.com/api/v1/schedule",
+  'schedule-season'           => "https://statsapi.web.nhl.com/api/v1/schedule?season=20212022",
+  'game-live-pregame'         => "https://statsapi.web.nhl.com/api/v1/game/2022030212/feed/live",
+  'game-live-inprogress'      => "https://statsapi.web.nhl.com/api/v1/game/2022030212/feed/live",
+  'game-linescore-inprogress' => "https://statsapi.web.nhl.com/api/v1/game/2022030212/linescore",
+  'game-boxscore-inprogress'  => "https://statsapi.web.nhl.com/api/v1/game/2022030212/boxscore",
+}.freeze
+
+def response_for(request)
+  {
+    body: File.read("#{Rails.root}/spec/fixtures/#{request}.json"),
+    headers: { content_type: 'application/json'},
+  }
+end
+
+def stub_for(request)
+  WebMock.stub_request(:get, AVAILABLE_STUBS[request]).to_return(response_for(request))
 end
