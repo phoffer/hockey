@@ -6,6 +6,10 @@ class Game < ApplicationRecord
   has_many :statlines
 
   scope :for_date, ->(date = Date.today) { where(date: date) }
+
+  def complete?
+    [5, 6, 7].include? self.status
+  end
 end
 
 # == Schema Information

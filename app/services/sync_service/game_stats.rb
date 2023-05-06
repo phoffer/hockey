@@ -3,13 +3,11 @@ module SyncService
     attr_reader :game
     def initialize(game)
       @game = game
-      @statlines = game.statlines.index_by(&:player_id)
-      if @statlines.empty?
-        @players = Player.for_game(game).index_by(&:external_id)
-      end
     end
 
     def sync
+      @statlines = game.statlines.reload.index_by(&:player_id)
+      @players = Player.for_game(game).index_by(&:external_id)
       live_data = api.live(game.external_id)
       update_statlines(live_data.dig('liveData', 'boxscore', 'teams', 'away', 'players'), game.away_team)
       update_statlines(live_data.dig('liveData', 'boxscore', 'teams', 'home', 'players'), game.home_team)
