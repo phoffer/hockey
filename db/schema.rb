@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_05_211944) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_06_223658) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,6 +32,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_211944) do
     t.index ["status"], name: "index_games_on_status"
   end
 
+  create_table "players", force: :cascade do |t|
+    t.integer "external_id"
+    t.bigint "team_id", null: false
+    t.string "name"
+    t.integer "jersey"
+    t.string "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_players_on_team_id"
+  end
+
   create_table "seasons", force: :cascade do |t|
     t.string "external_id", null: false
     t.date "regular_start_date"
@@ -40,6 +51,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_211944) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["external_id"], name: "index_seasons_on_external_id", unique: true
+  end
+
+  create_table "statlines", force: :cascade do |t|
+    t.bigint "player_id", null: false
+    t.bigint "game_id", null: false
+    t.json "stats"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_statlines_on_game_id"
+    t.index ["player_id"], name: "index_statlines_on_player_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -53,4 +74,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_211944) do
   add_foreign_key "games", "seasons"
   add_foreign_key "games", "teams", column: "away_team_id"
   add_foreign_key "games", "teams", column: "home_team_id"
+  add_foreign_key "players", "teams"
+  add_foreign_key "statlines", "games"
+  add_foreign_key "statlines", "players"
 end

@@ -3,6 +3,8 @@ class Game < ApplicationRecord
   belongs_to :away_team, class_name: 'Team'
   belongs_to :home_team, class_name: 'Team'
 
+  has_many :statlines
+
   scope :for_date, ->(date = Date.today) { where(date: date) }
 end
 
