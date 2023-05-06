@@ -99,6 +99,8 @@ end
 
 ## Setup basic stubbing support for NHL API. Would do something more advanced like VCR in a proper app, but wanted to reuse the prettified json already saved
 AVAILABLE_STUBS = {
+  'season-current'            => "https://statsapi.web.nhl.com/api/v1/seasons/current",
+  'season'                    => "https://statsapi.web.nhl.com/api/v1/seasons/20222023",
   'game-statuses'             => "https://statsapi.web.nhl.com/api/v1/gameStatus",
   'schedule-pregame'          => "https://statsapi.web.nhl.com/api/v1/schedule",
   'schedule-live'             => "https://statsapi.web.nhl.com/api/v1/schedule",

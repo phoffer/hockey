@@ -2,25 +2,36 @@ module SyncService
   class Seasons
     EXTERNAL_ID_FIELD = 'seasonId'
 
-    def initialize(season_id = :current)
-      @season_id = season_id
+    def initialize(season = :current)
+      if season.is_a?(Season)
+        @season_id  = season.external_id
+        @season     = season
+      else
+        @season_id = season
+      end
     end
 
-    def api
-      @api ||= HockeyApi.new
+    def sync_schedule
+      load_schedule(true)
+      sync_games
     end
 
-    def full_sync
-      sync(full: true)
+    def sync_today
+      load_schedule(false)
+      sync_games
     end
 
-    def sync(full: false)
+    def sync
       if @season_id == :current
         @season_id = info[EXTERNAL_ID_FIELD]
       end
-      load_schedule(full)
-      sync_games
       season
+    end
+
+    private
+
+    def api
+      @api ||= HockeyApi.new
     end
 
     def season
