@@ -10,7 +10,7 @@ class HockeyApi
   end
 
   def season(id = :current)
-    self.class.get("/api/v1/seasons/#{id}").to_h
+    self.class.get("/api/v1/seasons/#{id}").to_h['seasons'].first
   end
 
   def schedule(options = nil)

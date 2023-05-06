@@ -56,6 +56,8 @@ group :development, :test do
   # gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'pry-rails'
   gem 'rspec-rails', '~> 6.0'
+  gem 'annotate'
+  gem 'factory_bot'
 end
 
 group :development do
