@@ -8,9 +8,15 @@ module SyncService
     def sync
       @statlines = game.statlines.reload.index_by(&:player_id)
       @players = Player.for_game(game).index_by(&:external_id)
+      return if game.complete? && @statlines.present?
       live_data = api.live(game.external_id)
-      update_statlines(live_data.dig('liveData', 'boxscore', 'teams', 'away', 'players'), game.away_team)
-      update_statlines(live_data.dig('liveData', 'boxscore', 'teams', 'home', 'players'), game.home_team)
+      team_data = live_data.dig('liveData', 'boxscore', 'teams')
+      status = live_data.dig('gameData', 'status', 'statusCode')
+      ApplicationRecord.transaction do
+        update_statlines(team_data.dig('away', 'players'), game.away_team)
+        update_statlines(team_data.dig('home', 'players'), game.home_team)
+        game.update(status: status)
+      end
     end
 
     def update_statlines(players, team)
