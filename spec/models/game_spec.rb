@@ -5,6 +5,11 @@ RSpec.describe Game, type: :model do
   it "should have a valid factory" do
     assert game.valid?
   end
+
+  it "should be invalid without an external_id" do
+    game.external_id = nil
+    refute game.valid?
+  end
 end
 
 # == Schema Information

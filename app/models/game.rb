@@ -5,7 +5,16 @@ class Game < ApplicationRecord
 
   has_many :statlines
 
-  scope :for_date, ->(date = Date.today) { where(date: date) }
+  validates :external_id, presence: true
+
+  scope :for_date, ->(date = nil) { where(date: date || Hockey.current_league_date) } # do it this way to allow passing nil, ie. `Game.for_date(params[:date])`
+
+
+  attr_reader :home_stats, :away_stats
+
+  def title
+    [away_team.name, home_team.name].join(' @ ')
+  end
 
   def complete?
     [5, 6, 7].include? self.status

@@ -1,14 +1,57 @@
 <p style="color: green"><%= notice %></p>
-
-<h1>Games</h1>
-
-<div id="games">
-  <% @games.each do |game| %>
-    <%= render game %>
-    <p>
-      <%= link_to "Show this game", game %>
-    </p>
-  <% end %>
+<nav class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6" aria-label="Pagination">
+  <div class="hidden sm:block">
+    <h1 class="text-base font-semibold leading-6 text-gray-900">Games for <%= @date %></h1>
+  </div>
+  <div class="flex flex-1 justify-between sm:justify-end">
+    <% if @date != Hockey.current_league_date %>
+      <%= link_to 'Jump to Today', games_path, class: "relative mr-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0" %>
+    <% end %>
+    <%= link_to games_path(date: @date - 1), class: "relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0" do %>
+      <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
+      </svg>
+      <span><%= @date - 1 %></span>
+    <% end %>
+    <%= link_to games_path(date: @date + 1), class: "relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0" do %>
+      <span><%= @date + 1 %></span>
+      <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+      </svg>
+    <% end %>
+  </div>
+</nav>
+<div class="px-4 sm:px-6 lg:px-8 pt-4">
+  <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+      <h1 class="text-base font-semibold leading-6 text-gray-900">Games for <%= @date %></h1>
+    </div>
+  </div>
+  <div class="mt-8 flow-root">
+    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+          <h3 class="pl-4 py-1 text-base font-semibold leading-6 text-gray-900"><%= @games.size %> <%= 'Game'.pluralize @games.size %></h1>
+          <table class="min-w-full divide-y divide-gray-300">
+            <thead class="bg-gray-50">
+              <tr>
+                <th scope="col" class="pl-3 py-2 text-left text-sm font-semibold text-gray-900">External ID</th>
+                <th scope="col" class="pl-3 py-2 text-left text-sm font-semibold text-gray-900">Home</th>
+                <th scope="col" class="pl-3 py-2 text-left text-sm font-semibold text-gray-900">Away</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 bg-white">
+              <% @games.each do |game| %>
+                <tr>
+                  <td class="whitespace-nowrap pl-3 py-2 text-sm text-gray-500"><%= link_to game.external_id, game %></td>
+                  <td class="whitespace-nowrap pl-3 py-2 text-sm text-gray-500"><%= game.home_team.name %></td>
+                  <td class="whitespace-nowrap pl-3 py-2 text-sm text-gray-500"><%= game.away_team.name %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<%= link_to "New game", new_game_path %>

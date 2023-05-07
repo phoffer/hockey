@@ -1,0 +1,74 @@
+<nav class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6" aria-label="Pagination">
+  <div class="hidden sm:block">
+      <h1 class="text-base font-semibold leading-6 text-gray-900"><%= @game.title %></h1>
+      <h3 class="text-base font-semibold leading-6 text-gray-900"><%= @game.date %></h3>
+  </div>
+  <div class="flex flex-1 justify-between sm:justify-end">
+    <% if @date != Hockey.current_league_date %>
+      <%= link_to 'Back to Schedule', games_path, class: "relative mr-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0" %>
+    <% end %>
+  </div>
+</nav>
+
+<div class="px-4 sm:px-6 lg:px-8">
+  <div class="mt-8 flow-root">
+    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+          <h3 class="pl-4 py-1 text-base font-semibold leading-6 text-gray-900"><%= @game.away_team.name %></h1>
+          <table class="min-w-full divide-y divide-gray-300">
+            <thead class="bg-gray-50">
+              <tr>
+                <th scope="col" class="pl-3 py-2 text-left text-sm font-semibold text-gray-900">Number</th>
+                <th scope="col" class="pl-3 py-2 text-left text-sm font-semibold text-gray-900">Name</th>
+                <% Statline::DISPLAYED_STATS.each_key do |stat_title| %>
+                  <th scope="col" class="pl-3 py-2 text-left text-sm font-semibold text-gray-900"><%= stat_title %></th>
+                <% end %>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 bg-white">
+              <% skater_stats, goalie_stats = @game.away_stats.partition(&:skater?) %>
+              <% skater_stats.each do |statline| %>
+                <tr>
+                  <td class="whitespace-nowrap pl-3 text-sm text-gray-500"><%= statline.player.jersey %></td>
+                  <td class="whitespace-nowrap pl-3 text-sm text-gray-500"><%= statline.player.name %></td>
+                  <% Statline::DISPLAYED_STATS.each_value do |stat_name| %>
+                    <td class="whitespace-nowrap pl-3 text-sm text-gray-500"><%= statline.stat(stat_name) %></td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+          <h3 class="pl-4 py-1 text-base font-semibold leading-6 text-gray-900"><%= @game.home_team.name %></h1>
+          <table class="min-w-full divide-y divide-gray-300">
+            <thead class="bg-gray-50">
+              <tr>
+                <th scope="col" class="pl-3 py-2 text-left text-sm font-semibold text-gray-900">Number</th>
+                <th scope="col" class="pl-3 py-2 text-left text-sm font-semibold text-gray-900">Name</th>
+                <% Statline::DISPLAYED_STATS.each_key do |stat_title| %>
+                  <th scope="col" class="pl-3 py-2 text-left text-sm font-semibold text-gray-900"><%= stat_title %></th>
+                <% end %>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 bg-white">
+              <% skater_stats, goalie_stats = @game.home_stats.partition(&:skater?) %>
+              <% skater_stats.each do |statline| %>
+                <tr>
+                  <td class="whitespace-nowrap pl-3 text-sm text-gray-500"><%= statline.player.jersey %></td>
+                  <td class="whitespace-nowrap pl-3 text-sm text-gray-500"><%= statline.player.name %></td>
+                  <% Statline::DISPLAYED_STATS.each_value do |stat_name| %>
+                    <td class="whitespace-nowrap pl-3 text-sm text-gray-500"><%= statline.stat(stat_name) %></td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

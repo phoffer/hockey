@@ -3,11 +3,13 @@ class GamesController < ApplicationController
 
   # GET /games or /games.json
   def index
-    @games = Game.all
+    @date = (params[:date] || Hockey.current_league_date).to_date
+    @games = Game.for_date(@date)
   end
 
   # GET /games/1 or /games/1.json
   def show
+    @game.load_stats
   end
 
   # GET /games/new

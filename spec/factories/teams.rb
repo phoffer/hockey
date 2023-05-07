@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :team, aliases: [:away_team, :home_team] do
     sequence(:external_id)
+    name { "#{FFaker::Address.city} #{FFaker::AnimalUS.common_name.pluralize}" }
   end
 end
 

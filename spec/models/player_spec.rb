@@ -1,7 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Player, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:player) { create(:player) }
+  it "should have a valid factory" do
+    assert player.valid?
+  end
+
+  it "should be invalid without an external_id" do
+    player.external_id = nil
+    refute player.valid?
+  end
 end
 
 # == Schema Information
