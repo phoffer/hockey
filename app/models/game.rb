@@ -7,7 +7,7 @@ class Game < ApplicationRecord
 
   validates :external_id, presence: true
 
-  scope :for_date, ->(date = nil) { where(date: date || Hockey.current_league_date) } # do it this way to allow passing nil, ie. `Game.for_date(params[:date])`
+  scope :for_date, ->(date = nil) { where(date: date || Hockey.current_league_date).includes(:home_team, :away_team) } # do it this way to allow passing nil, ie. `Game.for_date(params[:date])`
 
 
   attr_reader :home_stats, :away_stats
