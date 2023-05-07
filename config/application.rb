@@ -18,5 +18,9 @@ module Hockey
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+  end
+  def self.current_league_date
+    Time.now.in_time_zone("America/Los_Angeles").to_date
   end
 end

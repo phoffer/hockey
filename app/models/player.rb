@@ -1,8 +1,25 @@
 class Player < ApplicationRecord
   belongs_to :team
+
   has_many :statlines
 
+  validates :external_id, :name, presence: true
+
   scope :for_game, ->(game) { where(team_id: [game.home_team_id, game.away_team_id]) }
+
+  VALID_POSITIONS = %w[C LW RW D G].freeze
+
+  def player_type
+    skater? ? :skater : :goalie
+  end
+
+  def skater?
+    VALID_POSITIONS.include?(position) && !goalie?
+  end
+
+  def goalie?
+    position == 'G'
+  end
 end
 
 # == Schema Information

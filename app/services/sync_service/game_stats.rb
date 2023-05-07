@@ -19,6 +19,8 @@ module SyncService
       end
     end
 
+    private
+
     def update_statlines(players, team)
       return if players.blank? # not sure all possible data structuring, this catches if data isn't available or is empty
       players.each_value do |player_data|
@@ -33,7 +35,7 @@ module SyncService
       unless statline = @statlines[player.id]
         statline = @statlines[player.id] || player.statlines.new(game: game)
       end
-      statline.update(stats: player_data.dig('stats'))
+      statline.update(stats: player_data.dig('stats'), stat_type: player.player_type)
     end
 
     def create_player(player_data, team)

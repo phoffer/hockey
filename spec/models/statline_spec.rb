@@ -9,6 +9,7 @@ end
 # Table name: statlines
 #
 #  id         :bigint           not null, primary key
+#  stat_type  :integer
 #  stats      :json
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

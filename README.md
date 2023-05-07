@@ -57,3 +57,4 @@ bundle exec rails db:setup
 * Request queueing and concurrency for realtime data sync
   - consecutive requests works right now when there's 1-2 games at a time
   - see notes in code
+  - Only checking active games instead of all games today

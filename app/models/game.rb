@@ -10,6 +10,22 @@ class Game < ApplicationRecord
   def complete?
     [5, 6, 7].include? self.status
   end
+
+  def load_stats
+    @home_stats, @away_stats = statlines.includes(:player).partition { |stats| stats.player.team_id == self.home_team_id }
+  end
+
+  def sync_live
+    SyncService::GameStats.new(self).sync
+  end
+
+  def self.sync_live_games
+    for_date.each(&:sync_live)
+  end
+
+  def self.import_daily_schedule
+    SyncService::Seasons.new.sync_today
+  end
 end
 
 # == Schema Information
