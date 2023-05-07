@@ -55,3 +55,7 @@ bundle exec rails db:setup
   - consecutive requests works right now when there's 1-2 games at a time
   - For a serious system, this should make concurrent requests, ie. using Typheous
   - Only checking active games instead of all games today
+
+# Bugs
+
+* Some temporary condition that allows stats to be created for players not playing in game. Suspect it's pregame data

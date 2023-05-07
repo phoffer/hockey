@@ -21,7 +21,7 @@ class Game < ApplicationRecord
   end
 
   def load_stats
-    @home_stats, @away_stats = statlines.includes(:player).partition { |stats| stats.player.team_id == self.home_team_id }
+    @home_stats, @away_stats = statlines.includes(:player).sort_by { |stats| stats.player.jersey }.partition { |stats| stats.player.team_id == self.home_team_id }
   end
 
   def sync_live
