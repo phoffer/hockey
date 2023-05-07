@@ -58,10 +58,12 @@ group :development, :test do
   gem 'rspec-rails', '~> 6.0'
   gem 'annotate'
   gem 'factory_bot'
+  gem 'ffaker'
 end
 
 group :development do
   gem 'better_errors', '~> 2.9.0'
+  gem 'binding_of_caller'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -79,4 +81,5 @@ group :test do
 end
 
 gem 'httparty', '~> 0.21'
+gem 'clockwork'
 
