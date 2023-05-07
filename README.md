@@ -1,5 +1,15 @@
 # README
 
+## How to run
+
+Assuming you've already set everything up, everything can be run with the following command:
+
+```
+bin/dev
+```
+
+This will boot the server on port 3000 and also run the clockwork process to sync schedule and live games.
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
@@ -24,6 +34,16 @@ Things you may want to cover:
 * ...
 
 # Local setup
+
+#### Requirements
+
+* Postgres
+* Some kind of version manager to provide:
+  - Ruby 3.2.0
+  - Yarn
+  - Node
+
+#### Setup
 
 ```
 git clone
@@ -56,5 +76,5 @@ bundle exec rails db:setup
   - Teams loaded from schedule, players loaded from game stats
 * Request queueing and concurrency for realtime data sync
   - consecutive requests works right now when there's 1-2 games at a time
-  - see notes in code
+  - For a serious system, this should make concurrent requests, ie. using Typheous
   - Only checking active games instead of all games today
