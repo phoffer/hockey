@@ -61,3 +61,4 @@ bundle exec rails db:setup
 
 * Update controller/views for players to have game log
 * Update controller/views for teams to have game schedule
+* Auto update games live! Add some hotwire/stimulus fun
