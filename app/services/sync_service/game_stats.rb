@@ -12,7 +12,7 @@ module SyncService
       live_data ||= live
       team_data = live_data.dig('liveData', 'boxscore', 'teams')
       status = live_data.dig('gameData', 'status', 'statusCode')
-      game.status = status
+      game.assign_attributes(game_status(live_data))
       ApplicationRecord.transaction do
         if game.inprogress? || game.complete?
           update_statlines(team_data.dig('away', 'players'), game.away_team)
@@ -23,6 +23,29 @@ module SyncService
     end
 
     private
+
+    def game_status(live_data)
+      {
+        status:       live_data.dig('gameData', 'status', 'statusCode'),
+        home_score:   live_data.dig('liveData', 'linescore', 'teams', 'home', 'goals'),
+        away_score:   live_data.dig('liveData', 'linescore', 'teams', 'away', 'goals'),
+        time_display: time_display(live_data.dig('liveData', 'linescore')),
+      }
+    end
+
+    def time_display(linescore)
+      # there is more complexity than covered here, just don't know full range of data returned
+      # ie. end of 1st, 1st intermission, start of 2nd, shootout (regular season), OT numbering (playoffs)
+      time = linescore['currentPeriodTimeRemaining']
+      period = linescore['currentPeriodOrdinal']
+      if time == 'Final'
+        'Final' # this misses the standard display if a game went to overtime => Final (OT)
+      elsif time && period
+        [time, period].join(' ')
+      elsif time == '0:00'
+        "End #{period}"
+      end
+    end
 
     def update_statlines(players, team)
       return if players.blank? # not sure all possible data structuring, this catches if data isn't available or is empty

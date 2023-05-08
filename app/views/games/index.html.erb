@@ -37,6 +37,9 @@
               <tr>
                 <th scope="col" class="pl-3 py-2 text-left text-sm font-semibold text-gray-900">External ID</th>
                 <th scope="col" class="pl-3 py-2 text-left text-sm font-semibold text-gray-900">Home</th>
+                <th scope="col" class="pl-3 py-2 text-left text-sm font-semibold text-gray-900">Score</th>
+                <th scope="col" class="pl-3 py-2 text-left text-sm font-semibold text-gray-900">State</th>
+                <th scope="col" class="pl-3 py-2 text-left text-sm font-semibold text-gray-900">Score</th>
                 <th scope="col" class="pl-3 py-2 text-left text-sm font-semibold text-gray-900">Away</th>
               </tr>
             </thead>
@@ -45,6 +48,9 @@
                 <tr>
                   <td class="whitespace-nowrap pl-3 py-2 text-sm text-gray-500"><%= link_to game.external_id, game %></td>
                   <td class="whitespace-nowrap pl-3 py-2 text-sm text-gray-500"><%= game.home_team.name %></td>
+                  <td class="whitespace-nowrap pl-3 py-2 text-sm text-gray-500"><%= link_to game.home_score, game %></td>
+                  <td class="whitespace-nowrap pl-3 py-2 text-sm text-gray-500"><%= link_to game.time_display || '', game %></td>
+                  <td class="whitespace-nowrap pl-3 py-2 text-sm text-gray-500"><%= link_to game.away_score, game %></td>
                   <td class="whitespace-nowrap pl-3 py-2 text-sm text-gray-500"><%= game.away_team.name %></td>
                 </tr>
               <% end %>

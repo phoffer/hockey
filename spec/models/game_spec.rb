@@ -44,9 +44,12 @@ end
 # Table name: games
 #
 #  id           :bigint           not null, primary key
+#  away_score   :integer          default(0)
 #  date         :date
+#  home_score   :integer          default(0)
 #  start_time   :datetime
 #  status       :integer
+#  time_display :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  away_team_id :bigint           not null
