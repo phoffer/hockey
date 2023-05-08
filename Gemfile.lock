@@ -102,6 +102,7 @@ GEM
     date (3.3.3)
     debug_inspector (1.1.0)
     diff-lcs (1.5.0)
+    docile (1.4.0)
     erubi (1.12.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
@@ -145,6 +146,8 @@ GEM
       net-protocol
     nio4r (2.5.9)
     nokogiri (1.14.3-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.14.3-x86_64-linux)
       racc (~> 1.4)
     pg (1.5.3)
     pry (0.14.2)
@@ -211,6 +214,12 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    simplecov (0.22.0)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.12.3)
+    simplecov_json_formatter (0.1.4)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -246,6 +255,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-22
+  x86_64-linux
 
 DEPENDENCIES
   annotate
@@ -267,6 +277,7 @@ DEPENDENCIES
   redis (~> 4.0)
   rspec-rails (~> 6.0)
   selenium-webdriver
+  simplecov
   sprockets-rails
   stimulus-rails
   turbo-rails
