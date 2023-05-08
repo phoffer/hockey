@@ -7,4 +7,6 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 # import current season to set up data
-SyncService::Seasons.new.sync
+unless Rails.env.test?
+  SyncService::Seasons.new.sync
+end
