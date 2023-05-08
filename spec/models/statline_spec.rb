@@ -1,7 +1,25 @@
 require 'rails_helper'
 
 RSpec.describe Statline, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:statline) { create(:statline) }
+  it "should have a valid factory" do
+    assert statline.valid?
+  end
+
+  describe '#stats' do
+    it 'should return regular stats' do
+      expect(statline.stat(:goals)).to   eq 1
+      expect(statline.stat(:assists)).to eq 2
+    end
+    it 'should return points' do
+      expect(statline.stat(:points)).to eq 3
+    end
+    it 'should return regular goalie stats' do
+      statline = create(:statline, :goalie)
+      expect(statline.stat(:saves)).to eq 10
+      expect(statline.stat(:shots)).to eq 12
+    end
+  end
 end
 
 # == Schema Information

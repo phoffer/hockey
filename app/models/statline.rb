@@ -19,6 +19,7 @@ class Statline < ApplicationRecord
   }
 
   def stat(stat_name)
+    stat_name = stat_name.to_s
     if stat_name == 'points'
       data['goals'] + data['assists']
     else

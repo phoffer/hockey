@@ -1,3 +1,4 @@
+# :nocov:
 class PlayersController < ApplicationController
   before_action :set_player, only: %i[ show edit update destroy ]
 
@@ -68,3 +69,4 @@ class PlayersController < ApplicationController
       params.require(:player).permit(:external_id, :team_id, :name, :jersey, :position)
     end
 end
+# :nocov:

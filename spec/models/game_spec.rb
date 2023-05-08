@@ -10,6 +10,33 @@ RSpec.describe Game, type: :model do
     game.external_id = nil
     refute game.valid?
   end
+
+  describe '#title' do
+    it 'should display game title' do
+      expect(game.title).to include(game.home_team.name)
+      expect(game.title).to include(game.away_team.name)
+    end
+  end
+
+  context 'game status helpers' do
+    it 'should identify completed games' do
+      refute game.complete?
+      game.status = 7 # hate magic numbers, see fixtures/game_statuses.json
+      assert game.complete?
+    end
+    it 'should identify in progress games' do
+      refute game.inprogress?
+      game.status = 3 # hate magic numbers, see fixtures/game_statuses.json
+      assert game.inprogress?
+    end
+  end
+
+  it 'should sync' do
+    stub_for('game-live-inprogress')
+    game = create(:game, external_id: '2022030212', status: 0)
+    expect { game.sync_live }.to change(Statline, :count).by(40)
+  end
+
 end
 
 # == Schema Information

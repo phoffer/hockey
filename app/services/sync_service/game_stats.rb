@@ -5,11 +5,11 @@ module SyncService
       @game = game
     end
 
-    def sync
+    def sync(live_data = nil)
       @statlines = game.statlines.reload.index_by(&:player_id)
       @players = Player.for_game(game).index_by(&:external_id)
       return if game.complete? && @statlines.present?
-      live_data = api.live(game.external_id)
+      live_data ||= live
       team_data = live_data.dig('liveData', 'boxscore', 'teams')
       status = live_data.dig('gameData', 'status', 'statusCode')
       game.status = status
@@ -59,16 +59,8 @@ module SyncService
       @api ||= HockeyApi.new
     end
 
-    def linescore
-      @linescore ||= api.linescore(@game_id)
-    end
-
-    def boxscore
-      @boxscore ||= api.boxscore(@game_id)
-    end
-
     def live
-      @live ||= api.live(@game_id)
+      api.live(game.external_id)
     end
 
   end

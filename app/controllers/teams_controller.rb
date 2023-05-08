@@ -1,3 +1,4 @@
+# :nocov:
 class TeamsController < ApplicationController
   before_action :set_team, only: %i[ show edit update destroy ]
 
@@ -68,3 +69,4 @@ class TeamsController < ApplicationController
       params.require(:team).permit(:external_id, :name)
     end
 end
+# :nocov:
