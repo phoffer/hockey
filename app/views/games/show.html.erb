@@ -1,3 +1,12 @@
 <p style="color: green"><%= notice %></p>
+<nav class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6" aria-label="Pagination">
+  <div class="hidden sm:block">
+      <h1 class="text-base font-semibold leading-6 text-gray-900"><%= @game.title %></h1>
+      <h3 class="text-base font-semibold leading-6 text-gray-900"><%= @game.date %></h3>
+  </div>
+  <div class="flex flex-1 justify-between sm:justify-end">
+    <%= link_to 'Back to Schedule', games_path(date: @game.date), class: "relative mr-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0" %>
+  </div>
+</nav>
 
 <%= render 'game' %>
