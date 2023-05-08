@@ -41,6 +41,7 @@
                 <th scope="col" class="pl-3 py-2 text-left text-sm font-semibold text-gray-900">State</th>
                 <th scope="col" class="pl-3 py-2 text-left text-sm font-semibold text-gray-900">Score</th>
                 <th scope="col" class="pl-3 py-2 text-left text-sm font-semibold text-gray-900">Away</th>
+                <th scope="col" class="pl-3 py-2 text-left text-sm font-semibold text-gray-900">Update</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 bg-white">
@@ -52,6 +53,7 @@
                   <td class="whitespace-nowrap pl-3 py-2 text-sm text-gray-500"><%= link_to game.time_display || '', game %></td>
                   <td class="whitespace-nowrap pl-3 py-2 text-sm text-gray-500"><%= link_to game.away_score, game %></td>
                   <td class="whitespace-nowrap pl-3 py-2 text-sm text-gray-500"><%= game.away_team.name %></td>
+                  <td class="whitespace-nowrap pl-3 py-2 text-sm text-gray-500"><%= link_to 'Update!', sync_game_path(game) %></td>
                 </tr>
               <% end %>
             </tbody>

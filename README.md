@@ -55,9 +55,9 @@ bundle exec rails db:setup
 # Bugs
 
 * Some temporary condition that allows stats to be created for players not playing in game. Suspect it's pregame data
+* Manual game update is handled in http request cycle. This is to avoid adding more requirements (redis/sidekiq) to this for now.
 
 # TODO
 
 * Update controller/views for players to have game log
 * Update controller/views for teams to have game schedule
-* 

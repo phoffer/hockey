@@ -8,5 +8,7 @@
 
 # import current season to set up data
 unless Rails.env.test?
-  SyncService::Seasons.new.sync
+  season = SyncService::Seasons.new
+  season.sync
+  season.sync_schedule
 end
