@@ -51,10 +51,6 @@ bundle exec rails db:setup
   - Teams are treated as static entities here
   - We will use lazy evaluation to set up team/players for this
   - Teams loaded from schedule, players loaded from game stats
-* Request queueing and concurrency for realtime data sync
-  - consecutive requests works right now when there's 1-2 games at a time
-  - For a serious system, this should make concurrent requests, ie. using Typheous
-  - Only checking active games instead of all games today
 
 # Bugs
 

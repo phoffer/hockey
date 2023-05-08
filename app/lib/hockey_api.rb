@@ -28,6 +28,15 @@ class HockeyApi
   end
 
   def live(game_id)
-    self.class.get("/api/v1/game/#{game_id}/feed/live").to_h
+    self.class.get(self.class.live_path(game_id)).to_h
+  end
+
+  class << self
+    def live_path(game_id)
+      "/api/v1/game/#{game_id}/feed/live"
+    end
+    def live_url(game_id)
+      base_uri + live_path(game_id)
+    end
   end
 end

@@ -83,4 +83,4 @@ end
 
 gem 'httparty', '~> 0.21'
 gem 'clockwork'
-
+gem 'typhoeus'

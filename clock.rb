@@ -15,7 +15,7 @@ module Clockwork
   # end
 
   every(SCHEDULE_INTERVAL, 'sync.daily_schedule') { Game.import_daily_schedule }
-  every(LIVE_INTERVAL, 'sync.live_games') { Game.sync_live_games }
+  every(LIVE_INTERVAL, 'sync.live_games') { Game.concurrent_sync }
   # every(3.minutes, 'less.frequent.job')
 
   # every(1.day, 'midnight.job', :at => '00:00')

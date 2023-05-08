@@ -3,7 +3,7 @@ class Game < ApplicationRecord
   belongs_to :away_team, class_name: 'Team'
   belongs_to :home_team, class_name: 'Team'
 
-  has_many :statlines
+  has_many :statlines, dependent: :destroy
 
   validates :external_id, presence: true
 
@@ -30,7 +30,15 @@ class Game < ApplicationRecord
   end
 
   def sync_live
-    SyncService::GameStats.new(self).sync
+    sync_service.sync
+  end
+
+  def sync_service
+    SyncService::GameStats.new(self)
+  end
+
+  def live_url
+    HockeyApi.live_url(self.external_id)
   end
 
   def self.sync_live_games
@@ -39,6 +47,33 @@ class Game < ApplicationRecord
 
   def self.import_daily_schedule
     SyncService::Seasons.new.sync_today
+  end
+
+  # this allows for concurrent game updates
+  # this is not really important when there's only 1 or 2 games at the same time
+  # but this is important for a bigger system, or for when there's multiple games simultaneously
+  # important for recurring job timing and also error handling (one game request failing won't block others)
+  def self.concurrent_sync(date = nil)
+    games = for_date(date) # this will allow testing with days with multiple games
+    requests = games.map do |game|
+      [game.live_url, game.sync_service.method(:sync)]
+    end
+    hydra = Typhoeus::Hydra.new(max_concurrency: 20)
+    requests.each do |url, callback|
+      request = Typhoeus::Request.new(url, method: :get)
+      request.on_complete do |response|
+        begin
+          res = JSON.parse(response.body)
+          callback.call(res)
+        rescue JSON::ParserError => e
+          #
+        rescue => e
+          #
+        end
+      end
+      hydra.queue request
+    end
+    hydra.run
   end
 end
 
