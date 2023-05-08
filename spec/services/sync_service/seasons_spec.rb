@@ -3,13 +3,13 @@ describe SyncService::Seasons do
 
   it 'should import season overview' do
     stub_for('season')
-    expect { described_class.sync(season_id) }.to change(Season, :count).by(1)
+    expect { described_class.new(season_id).sync }.to change(Season, :count).by(1)
     expect(Season.first.external_id).to eq(season_id)
   end
 
   it 'should import current season overview' do
     stub_for('season-current')
-    expect { described_class.sync(:current) }.to change(Season, :count).by(1)
+    expect { described_class.new(:current).sync }.to change(Season, :count).by(1)
     expect(Season.first.external_id).to eq(season_id)
   end
 
