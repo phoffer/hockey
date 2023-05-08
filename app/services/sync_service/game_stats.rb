@@ -12,10 +12,13 @@ module SyncService
       live_data = api.live(game.external_id)
       team_data = live_data.dig('liveData', 'boxscore', 'teams')
       status = live_data.dig('gameData', 'status', 'statusCode')
+      game.status = status
       ApplicationRecord.transaction do
-        update_statlines(team_data.dig('away', 'players'), game.away_team)
-        update_statlines(team_data.dig('home', 'players'), game.home_team)
-        game.update(status: status)
+        if game.inprogress? || game.complete?
+          update_statlines(team_data.dig('away', 'players'), game.away_team)
+          update_statlines(team_data.dig('home', 'players'), game.home_team)
+        end
+        game.save
       end
     end
 

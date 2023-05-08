@@ -16,6 +16,11 @@ class Game < ApplicationRecord
     [away_team.name, home_team.name].join(' @ ')
   end
 
+  # hardcoding for now :( see `game-statuses.json` for more info
+  def inprogress?
+    [3, 4].include? self.status
+  end
+
   def complete?
     [5, 6, 7].include? self.status
   end
