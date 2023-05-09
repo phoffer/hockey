@@ -10,7 +10,7 @@ bin/dev
 
 This will boot the server on port 3000 and also run the clockwork process to sync schedule and live games.
 
-Visit https://localhost:3000 and have fun!
+Visit http://localhost:3000 and have fun!
 
 ## Local setup
 
