@@ -88,8 +88,14 @@ module SyncService
       }
     end
 
-    def self.sync(season_id)
+    def self.sync(season_id = :current)
       self.new(season_id).sync
+    end
+
+    def self.import(season_id = :current)
+      service = self.new(season_id)
+      service.sync
+      service.sync_schedule
     end
   end
 end

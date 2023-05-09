@@ -10,9 +10,15 @@ bin/dev
 
 This will boot the server on port 3000 and also run the clockwork process to sync schedule and live games.
 
-# Local setup
+Visit https://localhost:3000 and have fun!
 
-#### Requirements
+## Local setup
+
+Local setup will import the current hockey season, but not sync any game data. Games for the current league date (ie. date for NHL) will automatically sync when running server. Other games can be manually synced from the schedule page.
+
+To import additional season, open a Rails console and run `SyncService::Seasons.import('SEASON_ID')`, where season ID follows the pattern of combining start and end years. IE. for 2021-2022, the ID is `20212022`.
+
+### Requirements
 
 * Postgres
 * Some kind of version manager to provide:
@@ -20,7 +26,7 @@ This will boot the server on port 3000 and also run the clockwork process to syn
   - Yarn
   - Node
 
-#### Setup
+### Setup
 
 ```
 git clone
@@ -35,10 +41,10 @@ asdf install
 bundle
 yarn
 bundle exec rails db:setup
-
+bin/dev
 ```
 
-# Considerations for a larger system but not handled for this app
+## Considerations for a larger system but not handled for this app
 
 * Building for different sports
   - Add a models for sports and for leagues
@@ -52,13 +58,14 @@ bundle exec rails db:setup
   - We will use lazy evaluation to set up team/players for this
   - Teams loaded from schedule, players loaded from game stats
 
-# Bugs
+## Bugs
 
 * Some temporary condition that allows stats to be created for players not playing in game. Suspect it's pregame data
 * Manual game update is handled in http request cycle. This is to avoid adding more requirements (redis/sidekiq) to this for now.
 
-# TODO
+## TODO
 
+* smarter logic to select which games to update, instead of all for current date
 * Update controller/views for players to have game log
 * Update controller/views for teams to have game schedule
 * Auto update games live! Add some hotwire/stimulus fun
