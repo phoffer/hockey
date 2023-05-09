@@ -66,6 +66,7 @@ bin/dev
 
 ## TODO
 
+* display goalie stats
 * smarter logic to select which games to update, instead of all for current date
 * Update controller/views for players to have game log
 * Update controller/views for teams to have game schedule

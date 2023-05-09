@@ -7,7 +7,7 @@ class Statline < ApplicationRecord
     goalie: 2,
   }
 
-  DISPLAYED_STATS = {
+  DISPLAYED_SKATER_STATS = {
     'TOI' => 'timeOnIce',
     'G'   => 'goals',
     'A'   => 'assists',

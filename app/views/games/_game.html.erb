@@ -26,7 +26,7 @@
               <tr>
                 <th scope="col" class="pl-3 py-2 text-left text-sm font-semibold text-gray-900">Number</th>
                 <th scope="col" class="pl-3 py-2 text-left text-sm font-semibold text-gray-900">Name</th>
-                <% Statline::DISPLAYED_STATS.each_key do |stat_title| %>
+                <% Statline::DISPLAYED_SKATER_STATS.each_key do |stat_title| %>
                   <th scope="col" class="pl-3 py-2 text-left text-sm font-semibold text-gray-900"><%= stat_title %></th>
                 <% end %>
               </tr>
@@ -37,7 +37,7 @@
                 <tr>
                   <td class="whitespace-nowrap pl-3 text-sm text-gray-500"><%= statline.player.jersey %></td>
                   <td class="whitespace-nowrap pl-3 text-sm text-gray-500"><%= statline.player.name %></td>
-                  <% Statline::DISPLAYED_STATS.each_value do |stat_name| %>
+                  <% Statline::DISPLAYED_SKATER_STATS.each_value do |stat_name| %>
                     <td class="whitespace-nowrap pl-3 text-sm text-gray-500"><%= statline.stat(stat_name) %></td>
                   <% end %>
                 </tr>
@@ -52,7 +52,7 @@
               <tr>
                 <th scope="col" class="pl-3 py-2 text-left text-sm font-semibold text-gray-900">Number</th>
                 <th scope="col" class="pl-3 py-2 text-left text-sm font-semibold text-gray-900">Name</th>
-                <% Statline::DISPLAYED_STATS.each_key do |stat_title| %>
+                <% Statline::DISPLAYED_SKATER_STATS.each_key do |stat_title| %>
                   <th scope="col" class="pl-3 py-2 text-left text-sm font-semibold text-gray-900"><%= stat_title %></th>
                 <% end %>
               </tr>
@@ -63,7 +63,7 @@
                 <tr>
                   <td class="whitespace-nowrap pl-3 text-sm text-gray-500"><%= statline.player.jersey %></td>
                   <td class="whitespace-nowrap pl-3 text-sm text-gray-500"><%= statline.player.name %></td>
-                  <% Statline::DISPLAYED_STATS.each_value do |stat_name| %>
+                  <% Statline::DISPLAYED_SKATER_STATS.each_value do |stat_name| %>
                     <td class="whitespace-nowrap pl-3 text-sm text-gray-500"><%= statline.stat(stat_name) %></td>
                   <% end %>
                 </tr>
