@@ -21,6 +21,7 @@ To import additional season, open a Rails console and run `SyncService::Seasons.
 ### Requirements
 
 * Postgres
+* Redis
 * Some kind of version manager to provide:
   - Ruby 3.2.0
   - Yarn

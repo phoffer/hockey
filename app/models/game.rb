@@ -9,8 +9,7 @@ class Game < ApplicationRecord
 
   scope :for_date, ->(date = nil) { where(date: date || Hockey.current_league_date).includes(:home_team, :away_team) } # do it this way to allow passing nil, ie. `Game.for_date(params[:date])`
 
-
-  attr_reader :home_stats, :away_stats
+  after_update_commit ->(game) { broadcast_replace_to game }
 
   def title
     [away_team.name, home_team.name].join(' @ ')
@@ -23,6 +22,16 @@ class Game < ApplicationRecord
 
   def complete?
     [5, 6, 7].include? self.status
+  end
+
+  def away_stats
+    load_stats unless @away_stats
+    @away_stats
+  end
+
+  def home_stats
+    load_stats unless @home_stats
+    @home_stats
   end
 
   def load_stats

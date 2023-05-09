@@ -1,26 +1,26 @@
-<div class="px-4 sm:px-6 lg:px-8">
+<%= turbo_stream_from game %>
+<div class="px-4 sm:px-6 lg:px-8" id="<%= dom_id(game) %>">
   <div class="mt-8 flow-root">
     <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
         <div>
-          <h3 class="text-base font-semibold leading-6 text-gray-900">This page will not automatically update</h3>
+          <h3 class="text-base font-semibold leading-6 text-gray-900">This page should update automatically</h3>
           <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-              <dt class="truncate text-sm font-medium text-gray-500"><%= @game.away_team.name %></dt>
-              <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900"><%= @game.away_score %></dd>
+              <dt class="truncate text-sm font-medium text-gray-500"><%= game.away_team.name %></dt>
+              <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900"><%= game.away_score %></dd>
             </div>
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-              <dt class="truncate text-sm font-medium text-gray-500"><%= @game.time_display %></dt>
-              <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900"><%= @game.time_display %></dd>
+              <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900"><%= game.time_display %></dd>
             </div>
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-              <dt class="truncate text-sm font-medium text-gray-500"><%= @game.home_team.name %></dt>
-              <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900"><%= @game.home_score %></dd>
+              <dt class="truncate text-sm font-medium text-gray-500"><%= game.home_team.name %></dt>
+              <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900"><%= game.home_score %></dd>
             </div>
           </dl>
         </div>
         <div class="my-4 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-          <h3 class="pl-4 py-1 text-base font-semibold leading-6 text-gray-900"><%= @game.away_team.name %></h1>
+          <h3 class="pl-4 py-1 text-base font-semibold leading-6 text-gray-900"><%= game.away_team.name %></h1>
           <table class="min-w-full divide-y divide-gray-300">
             <thead class="bg-gray-50">
               <tr>
@@ -32,7 +32,7 @@
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 bg-white">
-              <% skater_stats, goalie_stats = @game.away_stats.partition(&:skater?) %>
+              <% skater_stats, goalie_stats = game.away_stats.partition(&:skater?) %>
               <% skater_stats.each do |statline| %>
                 <tr>
                   <td class="whitespace-nowrap pl-3 text-sm text-gray-500"><%= statline.player.jersey %></td>
@@ -46,7 +46,7 @@
           </table>
         </div>
         <div class="my-4 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-          <h3 class="pl-4 py-1 text-base font-semibold leading-6 text-gray-900"><%= @game.home_team.name %></h1>
+          <h3 class="pl-4 py-1 text-base font-semibold leading-6 text-gray-900"><%= game.home_team.name %></h1>
           <table class="min-w-full divide-y divide-gray-300">
             <thead class="bg-gray-50">
               <tr>
@@ -58,7 +58,7 @@
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 bg-white">
-              <% skater_stats, goalie_stats = @game.home_stats.partition(&:skater?) %>
+              <% skater_stats, goalie_stats = game.home_stats.partition(&:skater?) %>
               <% skater_stats.each do |statline| %>
                 <tr>
                   <td class="whitespace-nowrap pl-3 text-sm text-gray-500"><%= statline.player.jersey %></td>
